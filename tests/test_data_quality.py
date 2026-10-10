@@ -1545,6 +1545,17 @@ class DataQualityGateTests(unittest.TestCase):
         self.assertEqual(recommendations[0].one_day_limit, 5000)
         self.assertIn("42.00%", recommendations[0].rank_desc)
 
+    def test_recommendation_not_blocked_when_qualification_missing(self) -> None:
+        code = "017653"
+        pool = {code: {"name": "候选基金", "theme": "全球股票", "style": "主动管理", "reason": "测试"}}
+        with patch.object(analyzer, "RECOMMENDATION_POOL", pool):
+            recommendations = analyze_recommendations(
+                {code: FundQuote(code, "候选基金", 1.1, iso(), source="eastmoney")},
+                {},
+            )
+
+        self.assertEqual(len(recommendations), 1)
+        self.assertEqual(recommendations[0].code, code)
     def test_new_target_is_not_duplicated_in_recommendation_pool(self) -> None:
         code = "161815"
         recommendations = analyze_recommendations(

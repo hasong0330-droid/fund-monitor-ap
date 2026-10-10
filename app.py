@@ -648,7 +648,7 @@ def render_dashboard(report: dict, data_status: str) -> str:
         recommendation_cards.append(
             f"""
             <article class="pick-card">
-              <h3>当前无符合全部硬条件的额外基金</h3>
+              <h3>当前暂无可展示的额外基金</h3>
               <p>{html.escape(exclusion_text)}</p>
               <p>未通过的资格条件仅作为参考信息，不再作为推荐前置门槛。</p>
             </article>
@@ -1418,7 +1418,7 @@ def render_dashboard(report: dict, data_status: str) -> str:
       <section id="tab-target" class="dashboard-tab-panel" role="tabpanel" hidden>
         <div class="section-title">指定基金分析（未配置）</div>
         <div class="grid">
-          {''.join(target_cards)}
+          {''.join(target_cards) or '<div class="empty-state">当前未配置指定基金。</div>'}
         </div>
       </section>
 

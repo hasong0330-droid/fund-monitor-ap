@@ -547,19 +547,8 @@ def _fetch_recommendation_qualification(code: str, meta: dict) -> dict:
     )
     average_percentile = sum(item["percentile"] for item in ranks) / len(ranks)
     reasons = []
-    if max_purchase < MIN_RECOMMENDATION_DAILY_LIMIT:
-        reasons.append(
-            f"当前单日申购限额{max_purchase:.0f}元，低于"
-            f"{MIN_RECOMMENDATION_DAILY_LIMIT}元"
-        )
     if "暂停" in purchase_status or "封闭" in purchase_status:
         reasons.append(f"当前申购状态不可买入（{purchase_status}）")
-    if manager_type != "主动管理":
-        reasons.append(f"基金类型识别为{manager_type}")
-    if not scope_verified:
-        reasons.append("基金基准未验证为重点投资全球或美股")
-    if average_percentile > 50:
-        reasons.append(f"近36个月月均同类排名{average_percentile:.2f}%，低于中游门槛")
 
     latest = ranks[-1]
     return {
