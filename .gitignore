@@ -1,0 +1,26 @@
+__pycache__/
+*.py[cod]
+
+# Runtime data and personal portfolio information
+cache/
+reports/
+logs/
+portfolio_defaults.py
+portfolio_positions.json
+*.lock
+
+# Local browser profile and temporary exports
+.chrome_dashboard_profile/
+tmp_browser.html
+backtest_samples/
+
+# Secrets and local environment files
+.env
+.env.*
+!.env.example
+*.key
+*.token
+
+# Operating system files
+.DS_Store
+Thumbs.db
